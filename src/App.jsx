@@ -1,26 +1,28 @@
-import "./App.css";
 import { Link, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Welcome from "./Pages/Welcome";
 import Header from "./Components/Header/Header";
+import { useState } from "react";
 
 function App() {
+  const [activeProfile, setActiveProfile] = useState(null);
+
   return (
     <>
       <Switch>
         <Route exact path='/login'>
+          <Header />
           <Login />
         </Route>
         <Route exact path='/home'>
-          <Home />
+          <Header activeProfile={activeProfile} />
+          <Home activeProfile={activeProfile} />
         </Route>
         <Route exact path='/welcome'>
-          <Welcome />
+          <Welcome setActiveProfile={setActiveProfile} />
         </Route>
-        <Route exact path='/'>
-          <Header />
-        </Route>
+        <Route exact path='/'></Route>
       </Switch>
 
       <div className='dev-navigation'>
